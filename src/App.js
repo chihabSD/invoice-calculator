@@ -200,11 +200,7 @@ const App = () => {
             Show invoice
           </Button>
         </form>
-<h2>Start date = {address} </h2>
-<div>
-        <button onClick={() => window.print()}>PRINT</button>
-        <p>Click above button opens print preview with these words on page</p>
-      </div>
+
         {/* <h1>number of days {period} </h1>
         <h1>number of days entered {daysInput} </h1>
         <h1>

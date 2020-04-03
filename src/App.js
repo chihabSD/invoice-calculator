@@ -126,11 +126,12 @@ const App = () => {
     var monthlyRounded = monthly.toFixed(2)
     console.log(" Monthly charges", monthlyRounded)
     setMonthlyCharges(monthlyRounded)
-
+// const floatEuro = parseFloat(getEuro)
+// const floatMonthly = parseFloat(monthlyRounded)
     var cardCharges = cardNumbers * 25;
     const getEuro = cardCharges/100
    console.log('Card charges ',getEuro)
-const calSu = monthlyRounded + getEuro
+const calSu = parseFloat(monthlyRounded) + parseFloat(getEuro)
   setSutotal(calSu)
 console.log("Sub total",calSu)
     var cents = cardCharges % 100

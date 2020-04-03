@@ -130,7 +130,9 @@ const App = () => {
     var cardCharges = cardNumbers * 25;
     const getEuro = cardCharges/100
    console.log('Card charges ',getEuro)
-
+const calSu = monthlyRounded + getEuro
+  setSutotal(calSu)
+console.log("Sub total",calSu)
     var cents = cardCharges % 100
     var q = Math.floor(cardCharges/100)
     // var currency = 
@@ -156,7 +158,7 @@ setMoney("\u20ac" + q + "." + cents )
    const getMonthlyRounded = parseFloat(monthlyRounded)
    const roundAfterVat = (getPercentage + getMonthlyRounded).toFixed(2)
    console.log("sub total ", roundAfterVat)
-   setSutotal(roundAfterVat)
+  //  setSutotal(roundAfterVat)
     var afterPercent =  percent;
     console.log("after tax", afterPercent)
 

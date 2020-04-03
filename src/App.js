@@ -77,6 +77,8 @@ const App = () => {
   const [charePerWeek,    setCharePerWeek] = useState(0);
   const [beforeTax,    setBeforeTax] = useState(0);
   const [afterTax,    setAfterTax] = useState(0);
+  const [vat,    setVat] = useState(0);
+  const [incVat,    setInclueVat] = useState(0);
 
   // monthly Charges
   const [monthlyCharges, setMonthlyCharges] = useState(0);
@@ -151,7 +153,7 @@ setMoney("\u20ac" + q + "." + cents )
     // console.log("before tax", beforetx)
     // setBeforeTax(beforetx)
     var percent = (calPercentage / 100) * monthlyRounded;
-    console.log("get percentage", percent)
+    console.log("get percentage of amount ", percent)
     // console.log("percent * before tax", percent)
     
     // get sub total
@@ -164,6 +166,7 @@ setMoney("\u20ac" + q + "." + cents )
     console.log("after tax", afterPercent)
 
     var rounded = Math.round(afterPercent * 100) / 100;
+    setVat(rounded)
     setAfterTax(rounded)
     console.log("rounded", rounded)
     var finalValue = (total - rounded).toFixed(2);
@@ -276,7 +279,7 @@ setMoney("\u20ac" + q + "." + cents )
   <p> Priod  : {period}</p>
   <p> Charge per Monthly  : {monthlyCharges}</p>
   <p> Card charge ({cardNumbers} cards )   : charge  {money}</p>
-  <p> Before tax  : {beforeTax}</p>
+  <p> Vat 23%  : {vat}</p>
   {/* <p> After tax  : after tax</p> */}
     <p> Sub total  : {subTotal}</p>
     <p> Your Charge : {totalValue}</p>

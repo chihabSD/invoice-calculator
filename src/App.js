@@ -71,7 +71,7 @@ const App = () => {
   const [cardNumbers, setCardNumbers] = useState(0);
 
   // Charge on cards
-  const [chargeOnCards, setChargeOnCards] = useState(0);
+  const [subTotal, setSutotal] = useState(0);
 
   // monthly Charges
   const [charePerWeek,    setCharePerWeek] = useState(0);
@@ -87,6 +87,7 @@ const App = () => {
 
   // Total inputs
   const [total, setTotal] = useState(0);
+  const [totalSale, setTotalSale] = useState(0);
 
   const [totalValue, setTotalValue] = useState(0);
   const [restaurant, setRestaurant] = useState("");
@@ -110,31 +111,26 @@ const App = () => {
     // const oneDay = 24 // hours*minutes*seconds*milliseconds
     const firstDate = startDate;
     const secondDate = endDate;
-    const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+    const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay) + 1);
+    
     console.log("Number of days ", diffDays);
     setPeriod(diffDays);
 
     // Charge per week
-    var days =  (daysInput / 7).toFixed(2);
+    var days =  daysInput / 7;
     setCharePerWeek(days)
     console.log(" charges / 7 : ", days)
 
     //Monthly charages
     var monthly = days * diffDays;
-    var monthlyRounded = monthly.toFixed(1)
-    console.log(" number of days * charges", monthlyRounded)
-    setMonthlyCharges(monthly)
-    // console.log("Montly: ", monthly)
+    var monthlyRounded = monthly.toFixed(2)
+    console.log(" Monthly charges", monthlyRounded)
+    setMonthlyCharges(monthlyRounded)
 
-    // Charge on cars
-    // var euro = ch / 100.0
-    // console.log("Cents", euro)
     var cardCharges = cardNumbers * 25;
-    // cardCharges /= 100;
-    // setChargeOnCards(cardCharges)
+    const getEuro = cardCharges/100
+   console.log('Card charges ',getEuro)
 
-    // *************
-    // var cents = 400
     var cents = cardCharges % 100
     var q = Math.floor(cardCharges/100)
     // var currency = 
@@ -142,18 +138,28 @@ const App = () => {
 setMoney("\u20ac" + q + "." + cents )
     // console.log("Charge on cards", cardCharges)
     
-    const values = monthly + cardCharges;
-    console.log("values", values)
+    // Calcualte sub total
+    // var values = monthlyRounded + getEuro;
+    // const roundVals = parseFloat(values).toFixed(2)
+    // // values=parseFloat(values).toFixed(2)
+    // console.log("monthl + card fees ", roundVals)
     var calPercentage = 23;
-    console.log("Cal percentage", calPercentage)
-    var beforetx = monthly + cardCharges;
-    console.log("before tax", beforetx)
-    setBeforeTax(beforetx)
-    var percent = (calPercentage / 100) * beforetx;
+    // var beforetx = monthly + cardCharges;
+    // console.log("before tax", beforetx)
+    // setBeforeTax(beforetx)
+    var percent = (calPercentage / 100) * monthlyRounded;
+    console.log("get percentage", percent)
     // console.log("percent * before tax", percent)
     
-    var afterPercent = values + percent;
-    console.log("after tax", percent)
+    // get sub total
+   const getPercentage = parseFloat(percent)
+   const getMonthlyRounded = parseFloat(monthlyRounded)
+   const roundAfterVat = (getPercentage + getMonthlyRounded).toFixed(2)
+   console.log("sub total ", roundAfterVat)
+   setSutotal(roundAfterVat)
+    var afterPercent =  percent;
+    console.log("after tax", afterPercent)
+
     var rounded = Math.round(afterPercent * 100) / 100;
     setAfterTax(rounded)
     console.log("rounded", rounded)
@@ -214,7 +220,7 @@ setMoney("\u20ac" + q + "." + cents )
             onChange={e => setTotal(e.target.value)}
             name="cards"
             type="number"
-            label=" Total Value "
+            label=" Total sale "
             autoFocus
           />
           <TextField
@@ -263,15 +269,20 @@ setMoney("\u20ac" + q + "." + cents )
   {/* <h4> Days input  : {daysInput}</h4> */}
       </div>
       <div style={divStyle}>
-    <p style={pStyle}>Calculation result </p>
-    <h4> Final value  : {totalValue}</h4>
-  <h3> Priod of days : {period}</h3>
-  <h3> Before Tax : {beforeTax}</h3>
-  <h3> AFter Tax : {afterTax}</h3>
+  <p> Charge per week  : {daysInput}</p>
+  <p> Priod  : {period}</p>
+  <p> Charge per Monthly  : {monthlyCharges}</p>
+  <p> Card charge ({cardNumbers} cards )   : charge  {money}</p>
+  <p> Before tax  : {beforeTax}</p>
+  {/* <p> After tax  : after tax</p> */}
+    <p> Sub total  : {subTotal}</p>
+    <p> Your Charge : {totalValue}</p>
   
-  <h3> Charge per week  : {daysInput}</h3>
-  <h4> Charge per Monthly  : {monthlyCharges}</h4>
-  <h4> Card payment & admin fees ({cardNumbers} cards orders * 25c)   : charge on cards  {money}</h4>
+
+    {/* <p style={pStyle}>Calculation result </p> */}
+  {/* <h3> Before Tax : {beforeTax}</h3>
+  <h3> AFter Tax : {afterTax}</h3> */}
+  
   </div>
       {/* {showInvoice ? (
         <Print restaurant={restaurant} startDate={startDate} endDate={endDate} />

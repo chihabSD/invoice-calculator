@@ -90,6 +90,8 @@ const App = () => {
   // Total inputs
   const [total, setTotal] = useState(0);
   const [totalSale, setTotalSale] = useState(0);
+  const [valueBeforeTotalSale, setValueBeforeTotalSale] = useState(0);
+  const [afterTotalSale, setAfterTotalSale] = useState(0);
 
   const [totalValue, setTotalValue] = useState(0);
   const [restaurant, setRestaurant] = useState("");
@@ -152,10 +154,11 @@ setMoney("\u20ac" + q + "." + cents )
     // var beforetx = monthly + cardCharges;
     // console.log("before tax", beforetx)
     // setBeforeTax(beforetx)
-    var percent = (calPercentage / 100) * monthlyRounded;
+    var percent = (calPercentage / 100) * calSu;
     console.log("get percentage of amount ", percent)
     // console.log("percent * before tax", percent)
     
+   
     // get sub total
    const getPercentage = parseFloat(percent)
    const getMonthlyRounded = parseFloat(monthlyRounded)
@@ -169,9 +172,15 @@ setMoney("\u20ac" + q + "." + cents )
     setVat(rounded)
     setAfterTax(rounded)
     console.log("rounded", rounded)
+
+     // Calcualte incVat
+     const includingVat = (calSu + rounded).toFixed(2)
+     setInclueVat(includingVat)
+     console.log("Value before total sale",rounded)
+     setValueBeforeTotalSale(rounded)
     var finalValue = (total - rounded).toFixed(2);
     console.log("final value", finalValue)
-    setTotalValue(finalValue);
+    setAfterTotalSale(finalValue);
   };
 
   // Display invoice
@@ -280,9 +289,15 @@ setMoney("\u20ac" + q + "." + cents )
   <p> Charge per Monthly  : {monthlyCharges}</p>
   <p> Card charge ({cardNumbers} cards )   : charge  {money}</p>
   <p> Vat 23%  : {vat}</p>
-  {/* <p> After tax  : after tax</p> */}
+  <p> Including vat  : {incVat}</p>
     <p> Sub total  : {subTotal}</p>
-    <p> Your Charge : {totalValue}</p>
+    {/* <p> Value before subtracting total sale  : {valueBeforeTotalSale}</p> */}
+    {afterTotalSale ? 
+  (
+
+    <p> Vale you after substracting it from total sale : {afterTotalSale}</p>
+  ) : null 
+  }
   
 
     {/* <p style={pStyle}>Calculation result </p> */}

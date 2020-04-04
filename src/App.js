@@ -11,9 +11,10 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Invoice from "./Invoice";
 
 // import PDF from "./PDF";
-import Print from "./Print";
+// import Print from "./Print";
 
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
@@ -176,9 +177,9 @@ setMoney("\u20ac" + q + "." + cents )
      // Calcualte incVat
      const includingVat = (calSu + rounded).toFixed(2)
      setInclueVat(includingVat)
-     console.log("Value before total sale",rounded)
+     console.log("Value before total sale",includingVat)
      setValueBeforeTotalSale(rounded)
-    var finalValue = (total - rounded).toFixed(2);
+    var finalValue = (total - includingVat).toFixed(2);
     console.log("final value", finalValue)
     setAfterTotalSale(finalValue);
   };
@@ -289,13 +290,13 @@ setMoney("\u20ac" + q + "." + cents )
   <p> Charge per Monthly  : {monthlyCharges}</p>
   <p> Card charge ({cardNumbers} cards )   : charge  {money}</p>
   <p> Vat 23%  : {vat}</p>
-  <p> Including vat  : {incVat}</p>
     <p> Sub total  : {subTotal}</p>
+  <p> Including vat  : {incVat}</p>
     {/* <p> Value before subtracting total sale  : {valueBeforeTotalSale}</p> */}
     {afterTotalSale ? 
   (
 
-    <p> Vale you after substracting it from total sale : {afterTotalSale}</p>
+    <p> You charge : {afterTotalSale}</p>
   ) : null 
   }
   
@@ -305,9 +306,9 @@ setMoney("\u20ac" + q + "." + cents )
   <h3> AFter Tax : {afterTax}</h3> */}
   
   </div>
-      {/* {showInvoice ? (
-        <Print restaurant={restaurant} startDate={startDate} endDate={endDate} />
-      ) : null} */}
+      {showInvoice ? (
+        <Invoice restaurant={restaurant} startDate={startDate} endDate={endDate} hidePdf={hidePdf}/>
+      ) : null}
     </Container>
   );
 };

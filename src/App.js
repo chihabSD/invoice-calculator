@@ -289,8 +289,8 @@ setMoney("\u20ac" + q + "." + cents )
   <p> Priod  : {period}</p>
   <p> Charge per Monthly  : {monthlyCharges}</p>
   <p> Card charge ({cardNumbers} cards )   : charge  {money}</p>
-  <p> Vat 23%  : {vat}</p>
     <p> Sub total  : {subTotal}</p>
+  <p> Vat 23%  : {vat}</p>
   <p> Including vat  : {incVat}</p>
     {/* <p> Value before subtracting total sale  : {valueBeforeTotalSale}</p> */}
     {afterTotalSale ? 

@@ -1,50 +1,270 @@
-.invoiceContainer{
-    // display: block; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 10px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+.invoiceContainer {
+  // display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 10px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  .invoiceSubCont {
+    background-color: white;
+    width: 40%;
+    // height: 800px;
     display: flex;
-    // align-items: center;
-    justify-content: center;
-    .invoiceSubCont {
-        background-color: white;
-        width: 50%;
-        // height: 800px;
-        display: flex;
-        flex-direction: column;
-        // align-items: center;
-        // justify-content: center;
-        height: 700px;
-        .Image {
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            padding-top: 30px;
-            // background-color: blue;
+    flex-direction: column;
 
-        .img {
-            width: 200px;
-            height: 55px;
-        }
-        }
-     .invoice-title {
-         background-color: blue;
-         display: flex;
-         margin-top: 20px;
-         width: 90%;
-         margin-left: 10px;
-         margin-right: 10px;
-         justify-content: center;
-
-         
-         
-     }
+    height: 800px;
+    .btn-invoice {
+      background-color: blue;
+      color: white;
+      font-size: 1rem;
     }
+    .Image {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+
+      .img {
+        width: 110px;
+        height: 35px;
+      }
+    }
+    .invoice-title {
+      //  background-color: blue;
+      display: flex;
+      // margin-top: 10px;
+      width: 100%;
+      margin-top: 20px;
+      flex-direction: column;
+
+      .resturant {
+        //  background-color: yellow;
+        padding-left: 20px;
+        p {
+          font-size: 0.9rem;
+          font-weight: 700;
+        }
+      }
+      .summary {
+        margin-top: -20px;
+        // padding-bottom: 200px;
+        border-bottom: 2px solid rgb(15, 15, 15);
+
+        //  background-color:red;
+        width: 90%;
+        margin-left: 20px;
+        display: flex;
+        //  padding-left: 20px;
+
+        p {
+          // align-self: flex-end;
+          padding-left: 120px;
+          margin-top: 45px;
+          padding-top: 5px;
+          font-weight: 500;
+          font-size: 0.9rem;
+        }
+        .period {
+          color: #e20e18;
+          margin-top: 45px;
+          padding-bottom: 5px;
+          font-size: 1.2rem;
+          // margin-bottom: -105px;
+        }
+      }
+    }
+    .tableContainer {
+      margin-top: 40px;
+      width: 100%;
+
+      height: auto;
+      // background-color: yellow;
+      table.customTable {
+        width: 90%;
+        margin-left: 20px;
+        background-color: #ffffff;
+        border-collapse: collapse;
+        border-width: 1px;
+        border-color: #0c0d0e;
+        border-style: solid;
+        color: #000000;
+      }
+
+      table.customTable td,
+      table.customTable th {
+        border-width: 1px;
+        border-color: #141618;
+        border-style: solid;
+        // padding: 20px;
+      }
+
+      table.customTable thead {
+        background-color: #7ea8f8;
+      }
+    }
+    // your invoice
+    .your-invoice {
+      // background-color: red;
+      padding-left: 20px;
+      // border-bottom: px solid black;
+      .your-line {
+        border-bottom: 2px solid black;
+        padding-bottom: 3px;
+        // background-color: red;
+        font-size: 0.9rem;
+        font-weight: 800;
+        width: 93%;
+      }
+      p {
+        padding-top: 10px;
+        font-size: 1.3rem;
+        color: #e20e18;
+        font-weight: 700;
+      }
+      h6 {
+        padding-top: 15px;
+        font-size: 0.9rem;
+        font-weight: 400;
+      }
+    }
+    // address
+    .address {
+      // background-color: black;
+      display: flex;
+      flex-wrap: wrap;
+      .address-details {
+        // justify-content: space-between;
+        // align-content: space-between;
+        flex: 0 0 50%;
+        padding: 10px;
+
+        padding-left: 20px;
+       
+      }
+      .fooding-details {
+        // justify-content: space-between;
+        // align-content: space-between;
+        flex: 0 0 50%;
+        padding: 10px;
+        // float: left;
+        padding-left: 100px;
+       
+      }
+      
+    }
+    .total-order-euro {
+      display: flex;
+      flex-direction: row;
+      
+    }
+    .total-order-euro-p {
+      color: #e20e18;
+      padding-left: 5px;
+      font-weight: 600;
+    }
+    table.blueTable {
+      // border: 1px solid #1c6ea4;
+      // background-color: #eeeeee;
+      margin-right: 20px;
+      margin-left: 20px;
+      width: 90%;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      text-align: left;
+      border-collapse: collapse;
+    }
+        .rowInside {
+          padding-left: 5px;
+          padding-bottom: 5px;
+          h7 {
+            color: #e20e18;
+          }
+        }
+        .last-third {
+          text-align: center;
+          padding-bottom: 5px;
+         .lasth-third-red {
+          color: #e20e18;
+          font-weight: 700;
+          font-size: 1.3rem;
+         }
+        }
+    table.blueTable td,
+    table.blueTable th {
+      border: 1px solid #aaaaaa;
+      padding: 2px 7px;
+    }
+    table.blueTable tbody td {
+      font-size: 13px;
+    }
+    table.blueTable tr:nth-child(even) {
+      background: #d0e4f5;
+    }
+    table.blueTable {
+      border: 1px solid #474747;
+      width: 90%;
+      text-align: left;
+      border-collapse: collapse;
+    }
+    table.blueTable td, table.blueTable th {
+      border: 1px solid #AAA2A4;
+      // padding: 3px 2px;
+    }
+    table.blueTable tbody td {
+      font-size: 13px;
+    }
+    table.blueTable tr:nth-child(even) {
+      background: #D1D1D1;
+    }
+    table.blueTable thead {
+      background: #FFFFFF;
+      background: -moz-linear-gradient(top, #ffffff 0%, #ffffff 66%, #FFFFFF 100%);
+      background: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 66%, #FFFFFF 100%);
+      background: linear-gradient(to bottom, #ffffff 0%, #ffffff 66%, #FFFFFF 100%);
+      border-bottom: 2px solid #444444;
+    }
+    table.blueTable thead th {
+      font-size: 15px;
+      font-weight: bold;
+      color: #FFFFFF;
+      border-left: 2px solid #D0E4F5;
+    }
+    table.blueTable thead th:first-child {
+      border-left: none;
+    }
+    
+    table.blueTable tfoot {
+      font-size: 14px;
+      font-weight: bold;
+      color: #FFFFFF;
+      border-top: 2px solid #444444;
+    }
+    table.blueTable tfoot td {
+      font-size: 14px;
+    }
+    table.blueTable tfoot .links {
+      text-align: right;
+    }
+ .thanks {
+   text-align: center;
+   padding-top: 10px;
+   font-size: 1rem;
+   font-weight: 300;
+ }
+ .order {
+   width: 45px;
+   height: 30px;
+   display: flex;
+   align-self: center;
+   padding-left: 10px;
+ }
+  }
 }

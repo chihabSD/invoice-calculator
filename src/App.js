@@ -429,7 +429,7 @@ const App = () => {
         <p> Sub total : {subTotal}</p>
         <p> Vat 23% : {vat}</p>
         <p> Including vat : {incVat}</p>
-        <p> Percentage entered : {percent}</p>
+        {/* <p> Percentage entered : {percent}</p> */}
 
         {afterTotalSale ? <p> You charge : {afterTotalSale}</p> : null}
       </div>

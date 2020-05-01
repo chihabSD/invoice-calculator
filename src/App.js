@@ -51,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
   const classes = useStyles();
 
+  const [percent, setPercent] = useState("");
+
   const [lastFour, setlastFour] = useState("");
   const [cardOrder, setCardOrder] = useState("");
   const [cashOrder, setCashOrder] = useState("");
@@ -121,26 +123,23 @@ const App = () => {
   const handleEnd = (date) => {
     setEndDate(date);
   };
+  const p = percent;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Calcualte Dates
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-    // const oneDay = 24 // hours*minutes*seconds*milliseconds
+  
     const firstDate = startDate;
-    // console.log(firstDate.getMonth())
+   
     const month = firstDate.toLocaleString('default', { month: 'long' });
     setMonthName(month)
     setMonthDay(firstDate.getDate())
     setMonthYear(firstDate.getFullYear())
 
    
-    // console.log(firstDate.getDate())
-    // // const day = firstDate.toLocaleString('default', { day });
-    // // setMonthDay(day)
-    // const year = firstDate.toLocaleString('default', { year: 'long' });
-    // setMonthYear(year)
+ 
 
     const secondDate = endDate;
     const endMonth = secondDate.toLocaleString('default', { month: 'long' });
@@ -166,9 +165,9 @@ const App = () => {
     var monthlyRounded = monthly.toFixed(2);
     console.log(" Monthly charges", monthlyRounded);
     setMonthlyCharges(monthlyRounded);
-    // const floatEuro = parseFloat(getEuro)
-    // const floatMonthly = parseFloat(monthlyRounded)
-    var cardCharges = cardNumbers * 25;
+   
+   
+    var cardCharges = cardNumbers * p;
     const getEuro = cardCharges / 100;
     console.log("Card charges ", getEuro);
     const calSu = parseFloat(monthlyRounded) + parseFloat(getEuro);
@@ -179,27 +178,17 @@ const App = () => {
     // var currency =
     console.log("charge per cards " + "\u20ac" + q + " and" + cents + " Cents");
     setMoney("\u20ac" + q + "." + cents);
-    // console.log("Charge on cards", cardCharges)
-
-    // Calcualte sub total
-    // var values = monthlyRounded + getEuro;
-    // const roundVals = parseFloat(values).toFixed(2)
-    // // values=parseFloat(values).toFixed(2)
-    // console.log("monthl + card fees ", roundVals)
+   
     var calPercentage = 23;
-    // var beforetx = monthly + cardCharges;
-    // console.log("before tax", beforetx)
-    // setBeforeTax(beforetx)
+   
     var percent = (calPercentage / 100) * calSu;
     console.log("get percentage of amount ", percent);
-    // console.log("percent * before tax", percent)
-
-    // get sub total
+  
     const getPercentage = parseFloat(percent);
     const getMonthlyRounded = parseFloat(monthlyRounded);
     const roundAfterVat = (getPercentage + getMonthlyRounded).toFixed(2);
     console.log("sub total ", roundAfterVat);
-    //  setSutotal(roundAfterVat)
+   
     var afterPercent = percent;
     console.log("after tax", afterPercent);
 
@@ -208,7 +197,7 @@ const App = () => {
     setAfterTax(rounded);
     console.log("rounded", rounded);
 
-    // Calcualte incVat
+ 
     const includingVat = (calSu + rounded).toFixed(2);
     setInclueVat(includingVat);
     console.log("Value before total sale", includingVat);
@@ -242,6 +231,17 @@ const App = () => {
           </div>
           <li>
             <label>
+              Enter percentage 30% or 25% etc <span class="required">*</span>
+            </label>
+            <input
+              onChange={(e) => setPercent(e.target.value)}
+              type="email"
+              name="field3"
+              class="field-long"
+            />
+          </li>
+          <li>
+            <label>
               Charge per week <span class="required">*</span>
             </label>
             <input
@@ -262,6 +262,7 @@ const App = () => {
               class="field-long"
             />
           </li>
+          
           <li>
             <label>
               Total sale <span class="required">*</span>
@@ -340,10 +341,10 @@ const App = () => {
             </button>
             {/* <input type="submit" value="Calculate" /> */}
           </li>
-          <button className="showInvoiceBtn" onClick={displayInvoice}>
+          {/* <button className="showInvoiceBtn" onClick={displayInvoice}>
             {" "}
             Show Invoice{" "}
-          </button>
+          </button> */}
         </ul>
       </div>
       <div className="theForm">
@@ -428,9 +429,11 @@ const App = () => {
         <p> Sub total : {subTotal}</p>
         <p> Vat 23% : {vat}</p>
         <p> Including vat : {incVat}</p>
+        <p> Percentage entered : {percent}</p>
 
         {afterTotalSale ? <p> You charge : {afterTotalSale}</p> : null}
       </div>
+   
       {showInvoice ? (
         <Invoice
           hideinfoive={hideinfoive}
@@ -461,114 +464,11 @@ const App = () => {
           monthlyCharges={monthlyCharges}
           willpayBy={willpayBy}
           endYear={endYear}
-          // hidePdf={hidePdf}
+      
         />
       ) : null}
     </div>
-    // <Container component="main" maxWidth="lg" className={classes.main}>
-    //   <div className={classes.paper}>
-    //     <Typography component="h1" variant="h5">
-    //       Invoice Calculator
-    //     </Typography>
-    //     <form className={classes.form} noValidate>
-    //       <div className={classes.date}>
-    //         <div className={classes.dateTwo}>
-    //           <p> Start Date </p>
-    //           <DatePicker selected={startDate} onChange={handleStart} />
-    //         </div>
-    //         <div className={classes.dateTwo}>
-    //           <p> End Date </p>
-    //           <DatePicker selected={endDate} onChange={handleEnd} />
-    //         </div>
-    //       </div>
-    //       <TextField
-    //         margin="normal"
-    //         required
-    //         fullWidth
-    //         onChange={(e) => setDaysInput(e.target.value)}
-    //         id="day"
-    //         type="number"
-    //         label="Charge per week"
-    //         autoFocus
-    //       />
-
-    //       <TextField
-    //         margin="normal"
-    //         required
-    //         fullWidth
-    //         onChange={(e) => setCardNumbers(e.target.value)}
-    //         type="number"
-    //         label="How many cards ?"
-    //         autoFocus
-    //       />
-    //       <TextField
-    //         margin="normal"
-    //         required
-    //         fullWidth
-    // onChange={(e) => setTotal(e.target.value)}
-    //         name="cards"
-    //         type="number"
-    //         label=" Total sale "
-    //         autoFocus
-    //       />
-    //       <TextField
-    //         margin="normal"
-    //         required
-    //         fullWidth
-    //         onChange={(e) => setRestaurant(e.target.value)}
-    //         name="cards"
-    //         type="text"
-    //         label=" Restaurant Name "
-    //         autoFocus
-    //       />
-    //       <TextField
-    //         margin="normal"
-    //         required
-    //         fullWidth
-    //         onChange={(e) => setAddress(e.target.value)}
-    //         name="cards"
-    //         type="text"
-    //         label=" Restaurant Adress"
-    //         autoFocus
-    //       />
-
-    //       <Button
-    //         type="submit"
-    //         fullWidth
-    //         variant="contained"
-    //         color="primary"
-    //         onClick={handleSubmit}
-    //         className={classes.submit}
-    //       >
-    //         Calculate
-    //       </Button>
-    //       <Button
-    //         type="submit"
-    //         fullWidth
-    //         variant="contained"
-    //         color="secondary"
-    //         onClick={displayInvoice}
-    //       >
-    //         Show invoice
-    //       </Button>
-    //     </form>
-    //   </div>
-    //   <div style={divStyle}>
-    //     <p> Charge per week : {daysInput}</p>
-    //     <p> Priod : {period}</p>
-    //     <p> Charge per Monthly : {monthlyCharges}</p>
-    //     <p>
-    //       {" "}
-    //       Card charge ({cardNumbers} cards ) : charge {money}
-    //     </p>
-    //     <p> Sub total : {subTotal}</p>
-    //     <p> Vat 23% : {vat}</p>
-    //     <p> Including vat : {incVat}</p>
-
-    //     {afterTotalSale ? <p> You charge : {afterTotalSale}</p> : null}
-    //   </div>
-
-    // </Container>
+  
   );
 };
 

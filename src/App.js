@@ -281,11 +281,7 @@ const App = () => {
 // //     localStorage.setItem('resturants', JSON.stringify(a));
 // }
 
-// const resturants = [
-//   { value: 'res', label: restaurant }
-//   // { value: 'strawberryss', label: 'Metro girll' },
 
-// ];
 // SaveDataToLocalStorage(resturants)
 //     var existing = localStorage.getItem('session');
    

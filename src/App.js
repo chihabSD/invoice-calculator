@@ -539,17 +539,7 @@ const App = () => {
               class="field-long"
             />
           </li> */}
-          {/* <li>
-            <label>
-              Invoice Months (March) <span class="required">*</span>
-            </label>
-            <input
-              onChange={(e) => setInvoiceMonth(e.target.value)}
-              type="email"
-              name="field3"
-              class="field-long"
-            />
-          </li> */}
+        
         
         </ul>
       </div>

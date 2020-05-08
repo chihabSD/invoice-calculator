@@ -1,2 +1,0 @@
-# invoice-calculator
-Invoice calculator

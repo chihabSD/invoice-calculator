@@ -130,8 +130,13 @@
         }
     }
     .result {
-        border: 1px solid gray;
+       
         padding: 20px;
         font-size: 1.3rem;
+        .p  {
+            border-bottom:1px solid gray;
+            padding-top:10px;
+           
+        }
     }
  }

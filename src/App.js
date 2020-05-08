@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./app.scss";
 import DatePicker from "react-datepicker";
-
+import Select from 'react-select';
 import "react-datepicker/dist/react-datepicker.css";
 
 import Button from "@material-ui/core/Button";
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     paddingRight: 100,
+    paddingRight:5
   },
   paper: {
     marginTop: theme.spacing(4),
@@ -48,9 +49,38 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2, 0, 1),
   },
 }));
+
+// const newRes = [
+//   { value: 'chocolate', label: 'Chocolate' },
+//   { value: 'strawberry', label: 'Strawberry' },
+//   { value: 'vanilla', label: 'Vanilla' },
+// ];
+
+// console.log("444",resturants)
+var rs = JSON.parse(localStorage.getItem("session"));
+
+let newRes 
+for ( let res of rs ){
+  newRes = res;
+}
+console.log("new resturants ", rs)
 const App = () => {
+
+
+    const retdata = JSON.parse(localStorage.getItem("resturant"));
+    // console.log(retdata)
   const classes = useStyles();
 
+  const [bankcharge, setBankCharge] = useState("")
+
+
+  let bc = bankcharge;
+ 
+
+
+
+  
+  const [select, setSelectOption] = useState(null);
   const [percent, setPercent] = useState("");
 
   const [lastFour, setlastFour] = useState("");
@@ -115,6 +145,16 @@ const App = () => {
   const [endYear,  setEndYear] = useState("");
   const [numberOfDays, setNumberOfDays] = useState("");
 
+
+  let cc = money;
+  // const data = [{resturantName: restaurant},{charge: 44}];
+  // const data = [{resturantName: restaurant},{charge: 44}];
+
+// alert("Your username is "  + data[0].resturantName);
+
+  // Storing resturant name and charge in local Storage
+ 
+  // console.log(newArray)
   // Show Invoice
   const [showInvoice, setShowInvoice] = useState(false);
   const handleStart = (date) => {
@@ -165,19 +205,27 @@ const App = () => {
     var monthlyRounded = monthly.toFixed(2);
     console.log(" Monthly charges", monthlyRounded);
     setMonthlyCharges(monthlyRounded);
-   
-   
+  
+
+    console.log(bc)
+    // calcualte card charges
     var cardCharges = cardNumbers * p;
-    const getEuro = cardCharges / 100;
+    const getEuro =  cardCharges / 100;
+  
     console.log("Card charges ", getEuro);
     const calSu = parseFloat(monthlyRounded) + parseFloat(getEuro);
-    setSutotal(calSu.toFixed(2));
+    setSutotal(calSu.toFixed(2) );
+
     console.log("Sub total", calSu.toFixed(2));
     var cents = cardCharges % 100;
     var q = Math.floor(cardCharges / 100);
     // var currency =
-    console.log("charge per cards " + "\u20ac" + q + " and" + cents + " Cents");
-    setMoney("\u20ac" + q + "." + cents);
+   let praseBc = parseInt(bc)
+   let cc  = q + praseBc;
+  //  console.log("adding cc", cc)
+
+    console.log("charge per cards " + "\u20ac" + cc + " and" + cents + " Cents");
+    setMoney("\u20ac" + cc  + "." + cents);
    
     var calPercentage = 23;
    
@@ -205,6 +253,64 @@ const App = () => {
     var finalValue = (total - includingVat).toFixed(2);
     console.log("final value", finalValue);
     setAfterTotalSale(finalValue);
+
+
+
+//     function SaveDataToLocalStorage(data)
+// {
+
+//   var existing = localStorage.getItem("session");
+
+
+//   existing = existing ? existing.split(',') : [];
+
+
+//   existing.push(data)
+
+//   localStorage.setItem("session", JSON.stringify(existing))
+
+
+// //     var a = [];
+// //     // Parse the serialized data back into an aray of objects
+// //     a = JSON.parse(localStorage.getItem('session')) || [];
+// //     // Push the new data (whether it be an object or anything else) onto the array
+// //     a.push(data);
+// //     // Alert the array value
+// //     alert(a);  // Should be something like [Object array]
+// //     // Re-serialize the array back into a string and store it in localStorage
+// //     localStorage.setItem('resturants', JSON.stringify(a));
+// }
+
+// const resturants = [
+//   { value: 'res', label: restaurant }
+//   // { value: 'strawberryss', label: 'Metro girll' },
+
+// ];
+// SaveDataToLocalStorage(resturants)
+//     var existing = localStorage.getItem('session');
+   
+
+  //  existing = existing ? existing :  [];
+
+  //  let newArray= []
+  
+  
+
+
+  // //   newArray.push(restaurant)
+  // //   newArray.push(daysInput)
+  // //   newArray.push(getEuro)
+
+
+  //   existing.push(resturants)
+  // //   // newArray.push(address1)
+  // //   // newArray.push(address2)
+  // //   // newArray.push(address3)
+
+  //   localStorage.setItem("resturant", JSON.stringify(existing));
+
+
+  
   };
 
   // Display invoice
@@ -215,10 +321,26 @@ const App = () => {
   const hideinfoive = () => {
     setShowInvoice(false);
   };
+
+  const handleChange = selectedOption => {
+   setSelectOption(selectedOption);
+    console.log(`Option selected:`, selectedOption);
+  };
   return (
     <div className="appContainer">
       <div className="theForm">
+        
         <ul class="form-style-1">
+        <li>
+            <label>
+              Select Resturant <span class="required">*</span>
+            </label>
+          <Select
+        value={select}
+        onChange={handleChange}
+        options={newRes}
+      />
+          </li>
           <div className={classes.date}>
             <div className={classes.dateTwo}>
               <p> Start Date </p>
@@ -231,10 +353,21 @@ const App = () => {
           </div>
           <li>
             <label>
-              Enter percentage 30% or 25% etc <span class="required">*</span>
+              Enter card fee  <span class="required">*</span>
             </label>
             <input
               onChange={(e) => setPercent(e.target.value)}
+              type="email"
+              name="field3"
+              class="field-long"
+            />
+          </li>
+          <li>
+            <label>
+              Bank charge  <span class="required">*</span>
+            </label>
+            <input
+              onChange={(e) => setBankCharge(e.target.value)}
               type="email"
               name="field3"
               class="field-long"
@@ -265,7 +398,7 @@ const App = () => {
           
           <li>
             <label>
-              Total sale <span class="required">*</span>
+              Total card order sale <span class="required">*</span>
             </label>
             <input
               onChange={(e) => setTotal(e.target.value)}
@@ -285,9 +418,20 @@ const App = () => {
               class="field-long"
             />
           </li>
+          <li>
+            <label>
+              Will be paid by (example: 05/02/2020)<span class="required">*</span>
+            </label>
+            <input
+              onChange={(e) => setWillpayBy(e.target.value)}
+              type="email"
+              name="field3"
+              class="field-long"
+            />
+          </li>
         
           {/* resturant  */}
-          <li>
+          {/* <li>
             <label>
               Resturant second address (8 crosbile place){" "}
               <span class="required">*</span>
@@ -309,8 +453,8 @@ const App = () => {
               name="field3"
               class="field-long"
             />
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <label>
               Postal code (H12 D677) <span class="required">*</span>
             </label>
@@ -320,8 +464,8 @@ const App = () => {
               name="field3"
               class="field-long"
             />
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <label>
               Enter card last 4 (example ****3432){" "}
               <span class="required">*</span>
@@ -332,7 +476,7 @@ const App = () => {
               name="field3"
               class="field-long"
             />
-          </li>
+          </li> */}
 
           <li>
             <button className="calculateBTN" onClick={handleSubmit}>
@@ -349,18 +493,8 @@ const App = () => {
       </div>
       <div className="theForm">
         <ul class="form-style-1">
-          <li>
-            <label>
-              Will be paid by (example: 05/02/2020)<span class="required">*</span>
-            </label>
-            <input
-              onChange={(e) => setWillpayBy(e.target.value)}
-              type="email"
-              name="field3"
-              class="field-long"
-            />
-          </li>
-          <li>
+      
+          {/* <li>
             <label>
               Total card order sales<span class="required">*</span>
             </label>
@@ -370,8 +504,8 @@ const App = () => {
               name="field3"
               class="field-long"
             />
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <label>
               Total card order Price <span class="required">*</span>
             </label>
@@ -381,8 +515,8 @@ const App = () => {
               name="field3"
               class="field-long"
             />
-          </li>
-          <h1>*********************</h1>
+          </li> */}
+          {/* <h1>*********************</h1>
           <li>
             <label>
               Total cash order sales<span class="required">*</span>
@@ -393,8 +527,8 @@ const App = () => {
               name="field3"
               class="field-long"
             />
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <label>
               Total cash order Price <span class="required">*</span>
             </label>
@@ -404,8 +538,8 @@ const App = () => {
               name="field3"
               class="field-long"
             />
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <label>
               Invoice Months (March) <span class="required">*</span>
             </label>
@@ -415,23 +549,28 @@ const App = () => {
               name="field3"
               class="field-long"
             />
-          </li>
+          </li> */}
+        
         </ul>
       </div>
       <div className="result">
-        <p> Charge per week : {daysInput}</p>
-        <p> Priod : {period}</p>
-        <p> Charge per Monthly : {monthlyCharges}</p>
-        <p>
+        <p className="p"> Charge per week : {daysInput}</p>
+        <p className="p">Priod : {period}</p>
+        <p className="p"> Charge per Monthly : {monthlyCharges}</p>
+        <p className="p">
           {" "}
-          Card charge ({cardNumbers} cards ) : charge {money}
+       Card order {cardNumbers} 
         </p>
-        <p> Sub total : {subTotal}</p>
-        <p> Vat 23% : {vat}</p>
-        <p> Including vat : {incVat}</p>
+        <p className="p">
+          {" "}
+       Card fee {money}
+        </p>
+        <p className="p">Sub total : {subTotal}</p>
+        <p className="p">Vat 23% : {vat}</p>
+        <p className="p"> Including vat : {incVat}</p>
         {/* <p> Percentage entered : {percent}</p> */}
 
-        {afterTotalSale ? <p> You charge : {afterTotalSale}</p> : null}
+        {afterTotalSale ? <p className="p"> Account balance : {afterTotalSale}</p> : null}
       </div>
    
       {showInvoice ? (

@@ -57,13 +57,13 @@ const useStyles = makeStyles((theme) => ({
 // ];
 
 // console.log("444",resturants)
-var rs = JSON.parse(localStorage.getItem("session"));
+// var rs = JSON.parse(localStorage.getItem("session"));
 
-let newRes 
-for ( let res of rs ){
-  newRes = res;
-}
-console.log("new resturants ", rs)
+// let newRes 
+// for ( let res of rs ){
+//   newRes = res;
+// }
+// console.log("new resturants ", rs)
 const App = () => {
 
 

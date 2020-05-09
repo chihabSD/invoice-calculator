@@ -327,7 +327,7 @@ const App = () => {
       <div className="theForm">
         
         <ul class="form-style-1">
-        <li>
+        {/* <li>
             <label>
               Select Resturant <span class="required">*</span>
             </label>
@@ -336,7 +336,7 @@ const App = () => {
         onChange={handleChange}
         options={newRes}
       />
-          </li>
+          </li> */}
           <div className={classes.date}>
             <div className={classes.dateTwo}>
               <p> Start Date </p>

@@ -175,7 +175,7 @@ const App = () => {
     
     let cPerecnet = (getCusomtPercent/ 100) * getTotalCard;
   
-    // console.log("Cusom percent ", cPerecnet)
+    console.log("Cusom percent ", getCusomtPercent)
     // Calcualte Dates
     // *************** Calcualte Days **********************************
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
@@ -225,11 +225,13 @@ const App = () => {
     var q = Math.floor(cardCharges / 100);
     // var currency =
    let praseBc = parseInt(bc)
-   let cc  = q + praseBc;
+   let cc  = getCusomtPercent + praseBc;
   //  console.log("adding cc", cc)
 
     console.log("charge per cards " + "\u20ac" + cc + " and" + cents + " Cents");
-    setMoney("\u20ac" + cc  + "." + cents);
+    // setMoney("\u20ac" + cc  + "." + cents);
+    // setMoney("\u20ac" + cc );
+    setMoney( getCusomtPercent );
    
     var calPercentage = 23;
    
@@ -386,7 +388,7 @@ const App = () => {
               class="field-long"
             />
           </li>
-          <li>
+          {/* <li>
             <label>
               How many cards ? <span class="required">*</span>
             </label>
@@ -396,7 +398,7 @@ const App = () => {
               name="field3"
               class="field-long"
             />
-          </li>
+          </li> */}
           
           <li>
             <label>
@@ -549,13 +551,13 @@ const App = () => {
         <p className="p"> Charge per week : {daysInput}</p>
         <p className="p">Priod : {period}</p>
         <p className="p"> Charge per Monthly : {monthlyCharges}</p>
-        <p className="p">
+        {/* <p className="p">
           {" "}
        Card order {cardNumbers} 
-        </p>
+        </p> */}
         <p className="p">
           {" "}
-       Card fee {money}
+       Card fee {money} %
         </p>
         <p className="p">Sub total : {subTotal}</p>
         <p className="p">Vat 23% : {vat}</p>

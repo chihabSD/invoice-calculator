@@ -355,7 +355,7 @@ const App = () => {
               <DatePicker selected={endDate} onChange={handleEnd} />
             </div>
           </div>
-          <li>
+          {/* <li>
             <label>
               Enter card fee  <span class="required">*</span>
             </label>
@@ -365,7 +365,7 @@ const App = () => {
               name="field3"
               class="field-long"
             />
-          </li>
+          </li> */}
           <li>
             <label>
               Card fee % <span class="required">*</span>

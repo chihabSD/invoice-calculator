@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import "./app.scss";
 import DatePicker from "react-datepicker";
-import Select from 'react-select';
+
 import "react-datepicker/dist/react-datepicker.css";
 
-import Button from "@material-ui/core/Button";
 
-import TextField from "@material-ui/core/TextField";
-
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+
 import Invoice from "./Invoice";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   dateTwo: {
     display: "flex",
     flexDirection: "column",
-    paddingRight: 100,
+    // paddingRight: 100,
     paddingRight:5
   },
   paper: {
@@ -80,6 +76,8 @@ const App = () => {
 
 
   
+  const [customPercent, setCusomPercent] = useState("");
+
   const [select, setSelectOption] = useState(null);
   const [percent, setPercent] = useState("");
 
@@ -89,7 +87,7 @@ const App = () => {
   // cardOrderMoney
   const [cardOrderMoney, setCardOrderMoney] = useState("");
   const [cashOrderMoney, setCashOrderMoney] = useState("");
-  const [invoiceMonth, setInvoiceMonth] = useState("");
+
 
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
@@ -128,6 +126,7 @@ const App = () => {
 
   // Total inputs
   const [total, setTotal] = useState(0);
+  
   const [totalSale, setTotalSale] = useState(0);
   const [valueBeforeTotalSale, setValueBeforeTotalSale] = useState(0);
   const [afterTotalSale, setAfterTotalSale] = useState(0);
@@ -164,33 +163,35 @@ const App = () => {
     setEndDate(date);
   };
   const p = percent;
-
+// console.log("Percent ",p)
+  // Calculate percentage 
+ // get cuesom percentg
+ let getCusomtPercent = customPercent
+ let getTotalCard = total;
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Calcualte Dates
-    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    
+    let cPerecnet = (getCusomtPercent/ 100) * getTotalCard;
   
+    // console.log("Cusom percent ", cPerecnet)
+    // Calcualte Dates
+    // *************** Calcualte Days **********************************
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
     const firstDate = startDate;
-   
     const month = firstDate.toLocaleString('default', { month: 'long' });
     setMonthName(month)
     setMonthDay(firstDate.getDate())
     setMonthYear(firstDate.getFullYear())
-
-   
- 
-
     const secondDate = endDate;
     const endMonth = secondDate.toLocaleString('default', { month: 'long' });
     setEndMonth(endMonth)
     setEndeDay(secondDate.getDate())
     setEndYear(secondDate.getFullYear())
-
     const diffDays = Math.round(
       Math.abs((firstDate - secondDate) / oneDay) + 1
     );
-
     console.log("Number of days ", diffDays);
     setPeriod(diffDays);
     setNumberOfDays(diffDays);
@@ -199,24 +200,27 @@ const App = () => {
     var days = daysInput / 7;
     setCharePerWeek(days);
     console.log(" charges / 7 : ", days);
-
+/*********************************************************************** */
     //Monthly charages
     var monthly = days * diffDays;
     var monthlyRounded = monthly.toFixed(2);
     console.log(" Monthly charges", monthlyRounded);
     setMonthlyCharges(monthlyRounded);
-  
-
-    console.log(bc)
+  console.log("Monthsly rouned", monthlyRounded)
+// console
+    // console.log(bc)
     // calcualte card charges
     var cardCharges = cardNumbers * p;
     const getEuro =  cardCharges / 100;
   
     console.log("Card charges ", getEuro);
     const calSu = parseFloat(monthlyRounded) + parseFloat(getEuro);
-    setSutotal(calSu.toFixed(2) );
+  let monthlyAdded = calSu + cPerecnet
+    // setSutotal(calSu.toFixed(2) );
+    setSutotal(monthlyAdded)
+    console.log("fdsf", monthlyAdded)
 
-    console.log("Sub total", calSu.toFixed(2));
+    // console.log("Sub total", calSu.toFixed(2));
     var cents = cardCharges % 100;
     var q = Math.floor(cardCharges / 100);
     // var currency =
@@ -229,14 +233,16 @@ const App = () => {
    
     var calPercentage = 23;
    
-    var percent = (calPercentage / 100) * calSu;
-    console.log("get percentage of amount ", percent);
+    var percent = (calPercentage / 100) * monthlyAdded;
+    // console.log("get percentage of amount ", percent);
   
     const getPercentage = parseFloat(percent);
     const getMonthlyRounded = parseFloat(monthlyRounded);
     const roundAfterVat = (getPercentage + getMonthlyRounded).toFixed(2);
     console.log("sub total ", roundAfterVat);
-   
+   const addToSubTotal = monthlyAdded + roundAfterVat;
+   console.log("Get sub total ",addToSubTotal)
+
     var afterPercent = percent;
     console.log("after tax", afterPercent);
 
@@ -246,7 +252,7 @@ const App = () => {
     console.log("rounded", rounded);
 
  
-    const includingVat = (calSu + rounded).toFixed(2);
+    const includingVat = (monthlyAdded + rounded).toFixed(2);
     setInclueVat(includingVat);
     console.log("Value before total sale", includingVat);
     setValueBeforeTotalSale(rounded);
@@ -360,10 +366,10 @@ const App = () => {
           </li>
           <li>
             <label>
-              Bank charge  <span class="required">*</span>
+              Card fee % <span class="required">*</span>
             </label>
             <input
-              onChange={(e) => setBankCharge(e.target.value)}
+              onChange={(e) => setCusomPercent(e.target.value)}
               type="email"
               name="field3"
               class="field-long"
@@ -416,7 +422,7 @@ const App = () => {
           </li>
           <li>
             <label>
-              Will be paid by (example: 05/02/2020)<span class="required">*</span>
+              Will be paid by <span class="required">*</span>
             </label>
             <input
               onChange={(e) => setWillpayBy(e.target.value)}

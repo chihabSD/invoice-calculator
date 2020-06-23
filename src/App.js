@@ -559,7 +559,7 @@ console.log("monthly added",monthlyAdded - monthlyRounded)
       <div className="result">
         <p className="p"> Charge per week : {daysInput}</p>
         <p className="p">Priod : {period} Days</p>
-        <p className="p"> Charge per Monthly : {monthlyCharges}</p>
+        <p className="p"> Charge per period : {monthlyCharges}</p>
         {/* <p className="p">
           {" "}
        Card order {cardNumbers} 

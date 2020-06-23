@@ -144,7 +144,11 @@ const App = () => {
   const [endYear,  setEndYear] = useState("");
   const [numberOfDays, setNumberOfDays] = useState("");
 
+  const [equals, setEquals] = useState("");
 
+console.log("quralse",equals)
+// const test = equals
+// console.log("quralse",test)
   let cc = money;
   // const data = [{resturantName: restaurant},{charge: 44}];
   // const data = [{resturantName: restaurant},{charge: 44}];
@@ -219,7 +223,11 @@ const App = () => {
     // setSutotal(calSu.toFixed(2) );
     setSutotal(monthlyAdded)
     console.log("fdsf", monthlyAdded)
-
+    setEquals(monthlyAdded - monthlyRounded)
+console.log("monthly added",monthlyAdded - monthlyRounded)
+    // const equlaed = monthlyAdded - getEuro
+    // console.log("Tefdsfdsf", equlaed)
+    // setEquals(monthlyAdded - getEuro)
     // console.log("Sub total", calSu.toFixed(2));
     var cents = cardCharges % 100;
     var q = Math.floor(cardCharges / 100);
@@ -549,7 +557,7 @@ const App = () => {
       </div>
       <div className="result">
         <p className="p"> Charge per week : {daysInput}</p>
-        <p className="p">Priod : {period}</p>
+        <p className="p">Priod : {period} Days</p>
         <p className="p"> Charge per Monthly : {monthlyCharges}</p>
         {/* <p className="p">
           {" "}
@@ -557,7 +565,7 @@ const App = () => {
         </p> */}
         <p className="p">
           {" "}
-       Card fee {money} %
+       Card fee {money} % = {equals}
         </p>
         <p className="p">Sub total : {subTotal}</p>
         <p className="p">Vat 23% : {vat}</p>

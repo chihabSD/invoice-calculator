@@ -223,8 +223,11 @@ console.log("quralse",equals)
     // setSutotal(calSu.toFixed(2) );
     setSutotal(monthlyAdded)
     console.log("fdsf", monthlyAdded)
-    setEquals(monthlyAdded - monthlyRounded)
-console.log("monthly added",monthlyAdded - monthlyRounded)
+    const roundedEquals = (monthlyAdded - monthlyRounded * 1).toFixed(2)
+    // setEquals(Math.round(roundedEquals * 100) / 100)
+    setEquals(roundedEquals)
+    console.log("rounded rouned", roundedEquals)
+// console.log("monthly added",monthlyAdded - monthlyRounded)
     // const equlaed = monthlyAdded - getEuro
     // console.log("Tefdsfdsf", equlaed)
     // setEquals(monthlyAdded - getEuro)

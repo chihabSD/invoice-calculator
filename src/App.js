@@ -410,8 +410,8 @@ console.log("monthly added",monthlyAdded - monthlyRounded)
           
           <li>
             <label>
-              {/* Total card order sale <span class="required">*</span> */}
-              Food inn total charge  <span class="required">*</span>
+              Total card order sale <span class="required">*</span>
+              {/* Food inn total charge  <span class="required">*</span> */}
             </label>
             <input
               onChange={(e) => setTotal(e.target.value)}

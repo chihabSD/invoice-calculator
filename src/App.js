@@ -244,7 +244,7 @@ console.log("quralse",equals)
     // setMoney("\u20ac" + cc );
     setMoney( getCusomtPercent );
    
-    var calPercentage = 23;
+    var calPercentage = 21;
    
     var percent = (calPercentage / 100) * monthlyAdded;
     // console.log("get percentage of amount ", percent);

@@ -1,9 +1,8 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import "./app.scss";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     // paddingRight: 100,
-    paddingRight:5
+    paddingRight: 5,
   },
   paper: {
     marginTop: theme.spacing(4),
@@ -55,27 +54,20 @@ const useStyles = makeStyles((theme) => ({
 // console.log("444",resturants)
 // var rs = JSON.parse(localStorage.getItem("session"));
 
-// let newRes 
+// let newRes
 // for ( let res of rs ){
 //   newRes = res;
 // }
 // console.log("new resturants ", rs)
 const App = () => {
-
-
-    const retdata = JSON.parse(localStorage.getItem("resturant"));
-    // console.log(retdata)
+  const retdata = JSON.parse(localStorage.getItem("resturant"));
+  // console.log(retdata)
   const classes = useStyles();
 
-  const [bankcharge, setBankCharge] = useState("")
-
+  const [bankcharge, setBankCharge] = useState("");
 
   let bc = bankcharge;
- 
 
-
-
-  
   const [customPercent, setCusomPercent] = useState("");
 
   const [select, setSelectOption] = useState(null);
@@ -87,7 +79,6 @@ const App = () => {
   // cardOrderMoney
   const [cardOrderMoney, setCardOrderMoney] = useState("");
   const [cashOrderMoney, setCashOrderMoney] = useState("");
-
 
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
@@ -126,7 +117,7 @@ const App = () => {
 
   // Total inputs
   const [total, setTotal] = useState(0);
-  
+
   const [totalSale, setTotalSale] = useState(0);
   const [valueBeforeTotalSale, setValueBeforeTotalSale] = useState(0);
   const [afterTotalSale, setAfterTotalSale] = useState(0);
@@ -134,29 +125,29 @@ const App = () => {
   const [totalValue, setTotalValue] = useState(0);
   const [restaurant, setRestaurant] = useState("");
 
-  const [monthName,  setMonthName] = useState("");
-  const [monthDay,  setMonthDay] = useState("");
-  const [monthYear,  setMonthYear] = useState("");
-  const [willpayBy,  setWillpayBy] = useState("");
+  const [monthName, setMonthName] = useState("");
+  const [monthDay, setMonthDay] = useState("");
+  const [monthYear, setMonthYear] = useState("");
+  const [willpayBy, setWillpayBy] = useState("");
 
-  const [endMonth,  setEndMonth] = useState("");
-  const [endDay,  setEndeDay] = useState("");
-  const [endYear,  setEndYear] = useState("");
+  const [endMonth, setEndMonth] = useState("");
+  const [endDay, setEndeDay] = useState("");
+  const [endYear, setEndYear] = useState("");
   const [numberOfDays, setNumberOfDays] = useState("");
 
   const [equals, setEquals] = useState("");
 
-console.log("quralse",equals)
-// const test = equals
-// console.log("quralse",test)
+  console.log("quralse", equals);
+  // const test = equals
+  // console.log("quralse",test)
   let cc = money;
   // const data = [{resturantName: restaurant},{charge: 44}];
   // const data = [{resturantName: restaurant},{charge: 44}];
 
-// alert("Your username is "  + data[0].resturantName);
+  // alert("Your username is "  + data[0].resturantName);
 
   // Storing resturant name and charge in local Storage
- 
+
   // console.log(newArray)
   // Show Invoice
   const [showInvoice, setShowInvoice] = useState(false);
@@ -167,32 +158,31 @@ console.log("quralse",equals)
     setEndDate(date);
   };
   const p = percent;
-// console.log("Percent ",p)
-  // Calculate percentage 
- // get cuesom percentg
- let getCusomtPercent = customPercent
- let getTotalCard = total;
- 
+  // console.log("Percent ",p)
+  // Calculate percentage
+  // get cuesom percentg
+  let getCusomtPercent = customPercent;
+  let getTotalCard = total;
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
-    let cPerecnet = (getCusomtPercent/ 100) * getTotalCard;
-  
-    console.log("Cusom percent ", getCusomtPercent)
+    let cPerecnet = (getCusomtPercent / 100) * getTotalCard;
+
+    console.log("Cusom percent ", getCusomtPercent);
     // Calcualte Dates
     // *************** Calcualte Days **********************************
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
     const firstDate = startDate;
-    const month = firstDate.toLocaleString('default', { month: 'long' });
-    setMonthName(month)
-    setMonthDay(firstDate.getDate())
-    setMonthYear(firstDate.getFullYear())
+    const month = firstDate.toLocaleString("default", { month: "long" });
+    setMonthName(month);
+    setMonthDay(firstDate.getDate());
+    setMonthYear(firstDate.getFullYear());
     const secondDate = endDate;
-    const endMonth = secondDate.toLocaleString('default', { month: 'long' });
-    setEndMonth(endMonth)
-    setEndeDay(secondDate.getDate())
-    setEndYear(secondDate.getFullYear())
+    const endMonth = secondDate.toLocaleString("default", { month: "long" });
+    setEndMonth(endMonth);
+    setEndeDay(secondDate.getDate());
+    setEndYear(secondDate.getFullYear());
     const diffDays = Math.round(
       Math.abs((firstDate - secondDate) / oneDay) + 1
     );
@@ -204,30 +194,30 @@ console.log("quralse",equals)
     var days = daysInput / 7;
     setCharePerWeek(days);
     console.log(" charges / 7 : ", days);
-/*********************************************************************** */
+    /*********************************************************************** */
     //Monthly charages
     var monthly = days * diffDays;
     var monthlyRounded = monthly.toFixed(2);
     console.log(" Monthly charges", monthlyRounded);
     setMonthlyCharges(monthlyRounded);
-  console.log("Monthsly rouned", monthlyRounded)
-// console
+    console.log("Monthsly rouned", monthlyRounded);
+    // console
     // console.log(bc)
     // calcualte card charges
     var cardCharges = cardNumbers * p;
-    const getEuro =  cardCharges / 100;
-  
+    const getEuro = cardCharges / 100;
+
     console.log("Card charges ", getEuro);
     const calSu = parseFloat(monthlyRounded) + parseFloat(getEuro);
-  let monthlyAdded = calSu + cPerecnet
+    let monthlyAdded = calSu + cPerecnet;
     // setSutotal(calSu.toFixed(2) );
-    setSutotal(monthlyAdded)
-    console.log("fdsf", monthlyAdded)
-    const roundedEquals = (monthlyAdded - monthlyRounded * 1).toFixed(2)
+    setSutotal(monthlyAdded);
+    console.log("fdsf", monthlyAdded);
+    const roundedEquals = (monthlyAdded - monthlyRounded * 1).toFixed(2);
     // setEquals(Math.round(roundedEquals * 100) / 100)
-    setEquals(roundedEquals)
-    console.log("rounded rouned", roundedEquals)
-// console.log("monthly added",monthlyAdded - monthlyRounded)
+    setEquals(roundedEquals);
+    console.log("rounded rouned", roundedEquals);
+    // console.log("monthly added",monthlyAdded - monthlyRounded)
     // const equlaed = monthlyAdded - getEuro
     // console.log("Tefdsfdsf", equlaed)
     // setEquals(monthlyAdded - getEuro)
@@ -235,26 +225,28 @@ console.log("quralse",equals)
     var cents = cardCharges % 100;
     var q = Math.floor(cardCharges / 100);
     // var currency =
-   let praseBc = parseInt(bc)
-   let cc  = getCusomtPercent + praseBc;
-  //  console.log("adding cc", cc)
+    let praseBc = parseInt(bc);
+    let cc = getCusomtPercent + praseBc;
+    //  console.log("adding cc", cc)
 
-    console.log("charge per cards " + "\u20ac" + cc + " and" + cents + " Cents");
+    console.log(
+      "charge per cards " + "\u20ac" + cc + " and" + cents + " Cents"
+    );
     // setMoney("\u20ac" + cc  + "." + cents);
     // setMoney("\u20ac" + cc );
-    setMoney( getCusomtPercent );
-   
-    var calPercentage = 21;
-   
+    setMoney(getCusomtPercent);
+
+    var calPercentage = 23;
+
     var percent = (calPercentage / 100) * monthlyAdded;
     // console.log("get percentage of amount ", percent);
-  
+
     const getPercentage = parseFloat(percent);
     const getMonthlyRounded = parseFloat(monthlyRounded);
     const roundAfterVat = (getPercentage + getMonthlyRounded).toFixed(2);
     console.log("sub total ", roundAfterVat);
-   const addToSubTotal = monthlyAdded + roundAfterVat;
-   console.log("Get sub total ",addToSubTotal)
+    const addToSubTotal = monthlyAdded + roundAfterVat;
+    console.log("Get sub total ", addToSubTotal);
 
     var afterPercent = percent;
     console.log("after tax", afterPercent);
@@ -264,7 +256,6 @@ console.log("quralse",equals)
     setAfterTax(rounded);
     console.log("rounded", rounded);
 
- 
     const includingVat = (monthlyAdded + rounded).toFixed(2);
     setInclueVat(includingVat);
     console.log("Value before total sale", includingVat);
@@ -273,59 +264,45 @@ console.log("quralse",equals)
     console.log("final value", finalValue);
     setAfterTotalSale(finalValue);
 
+    //     function SaveDataToLocalStorage(data)
+    // {
 
+    //   var existing = localStorage.getItem("session");
 
-//     function SaveDataToLocalStorage(data)
-// {
+    //   existing = existing ? existing.split(',') : [];
 
-//   var existing = localStorage.getItem("session");
+    //   existing.push(data)
 
+    //   localStorage.setItem("session", JSON.stringify(existing))
 
-//   existing = existing ? existing.split(',') : [];
+    // //     var a = [];
+    // //     // Parse the serialized data back into an aray of objects
+    // //     a = JSON.parse(localStorage.getItem('session')) || [];
+    // //     // Push the new data (whether it be an object or anything else) onto the array
+    // //     a.push(data);
+    // //     // Alert the array value
+    // //     alert(a);  // Should be something like [Object array]
+    // //     // Re-serialize the array back into a string and store it in localStorage
+    // //     localStorage.setItem('resturants', JSON.stringify(a));
+    // }
 
+    // SaveDataToLocalStorage(resturants)
+    //     var existing = localStorage.getItem('session');
 
-//   existing.push(data)
+    //  existing = existing ? existing :  [];
 
-//   localStorage.setItem("session", JSON.stringify(existing))
+    //  let newArray= []
 
+    // //   newArray.push(restaurant)
+    // //   newArray.push(daysInput)
+    // //   newArray.push(getEuro)
 
-// //     var a = [];
-// //     // Parse the serialized data back into an aray of objects
-// //     a = JSON.parse(localStorage.getItem('session')) || [];
-// //     // Push the new data (whether it be an object or anything else) onto the array
-// //     a.push(data);
-// //     // Alert the array value
-// //     alert(a);  // Should be something like [Object array]
-// //     // Re-serialize the array back into a string and store it in localStorage
-// //     localStorage.setItem('resturants', JSON.stringify(a));
-// }
+    //   existing.push(resturants)
+    // //   // newArray.push(address1)
+    // //   // newArray.push(address2)
+    // //   // newArray.push(address3)
 
-
-// SaveDataToLocalStorage(resturants)
-//     var existing = localStorage.getItem('session');
-   
-
-  //  existing = existing ? existing :  [];
-
-  //  let newArray= []
-  
-  
-
-
-  // //   newArray.push(restaurant)
-  // //   newArray.push(daysInput)
-  // //   newArray.push(getEuro)
-
-
-  //   existing.push(resturants)
-  // //   // newArray.push(address1)
-  // //   // newArray.push(address2)
-  // //   // newArray.push(address3)
-
-  //   localStorage.setItem("resturant", JSON.stringify(existing));
-
-
-  
+    //   localStorage.setItem("resturant", JSON.stringify(existing));
   };
 
   // Display invoice
@@ -337,16 +314,15 @@ console.log("quralse",equals)
     setShowInvoice(false);
   };
 
-  const handleChange = selectedOption => {
-   setSelectOption(selectedOption);
+  const handleChange = (selectedOption) => {
+    setSelectOption(selectedOption);
     console.log(`Option selected:`, selectedOption);
   };
   return (
     <div className="appContainer">
       <div className="theForm">
-        
         <ul class="form-style-1">
-        {/* <li>
+          {/* <li>
             <label>
               Select Resturant <span class="required">*</span>
             </label>
@@ -410,7 +386,7 @@ console.log("quralse",equals)
               class="field-long"
             />
           </li> */}
-          
+
           <li>
             <label>
               Total card order sale <span class="required">*</span>
@@ -445,7 +421,7 @@ console.log("quralse",equals)
               class="field-long"
             />
           </li>
-        
+
           {/* resturant  */}
           {/* <li>
             <label>
@@ -509,7 +485,6 @@ console.log("quralse",equals)
       </div>
       <div className="theForm">
         <ul class="form-style-1">
-      
           {/* <li>
             <label>
               Total card order sales<span class="required">*</span>
@@ -555,8 +530,6 @@ console.log("quralse",equals)
               class="field-long"
             />
           </li> */}
-        
-        
         </ul>
       </div>
       <div className="result">
@@ -569,16 +542,18 @@ console.log("quralse",equals)
         </p> */}
         <p className="p">
           {" "}
-       Card fee {money} % = {equals}
+          Card fee {money} % = {equals}
         </p>
         <p className="p">Sub total : {subTotal}</p>
         <p className="p">Vat 23% : {vat}</p>
         <p className="p"> Including vat : {incVat}</p>
         {/* <p> Percentage entered : {percent}</p> */}
 
-        {afterTotalSale ? <p className="p"> Account balance : {afterTotalSale}</p> : null}
+        {afterTotalSale ? (
+          <p className="p"> Account balance : {afterTotalSale}</p>
+        ) : null}
       </div>
-   
+
       {showInvoice ? (
         <Invoice
           hideinfoive={hideinfoive}
@@ -609,11 +584,9 @@ console.log("quralse",equals)
           monthlyCharges={monthlyCharges}
           willpayBy={willpayBy}
           endYear={endYear}
-      
         />
       ) : null}
     </div>
-  
   );
 };
 
